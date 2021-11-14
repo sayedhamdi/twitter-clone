@@ -3,10 +3,10 @@ import {BsTwitter} from "react-icons/bs"
 import Menu from "./Menu"
 export default function LeftSideBar(){
 	return (
-		<Col sm="2">
+		<Col sm="3">
 			<Container fluid>
 				<Row>
-					<Col><BsTwitter style={{fontSize:'28px',color:'#2B9BF0'}} /></Col>
+					<Col><BsTwitter style={{fontSize:'28px',color:'#2B9BF0',marginTop:"15px"}} /></Col>
 				</Row>
 				<Row>
 					<Menu />

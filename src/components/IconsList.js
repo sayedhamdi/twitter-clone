@@ -7,14 +7,14 @@ import {CgProfile,CgMoreO} from "react-icons/cg"
 
 
 const MENU_ITEMS =[
-	{text:'Home',icon:RiHome7Fill},
-	{text:'explore',icon:HiHashtag},
-	{text:'notifications',icon:IoIosNotificationsOutline},
-	{text:'Message',icon:AiOutlineMail},
-	{text:'Bookmark',icon:BiBookmark},
-	{text:'Lists',icon:RiFileList2Line},
-	{text:'Profile',icon:CgProfile},
-	{text:'More',icon:CgMoreO}
+	{text:'Home',icon:RiHome7Fill,link:'/home'},
+	{text:'explore',icon:HiHashtag,link:'/explore'},
+	{text:'notifications',icon:IoIosNotificationsOutline,link:'/notifications'},
+	{text:'Message',icon:AiOutlineMail,link:''},
+	{text:'Bookmark',icon:BiBookmark,link:''},
+	{text:'Lists',icon:RiFileList2Line,link:''},
+	{text:'Profile',icon:CgProfile,link:''},
+	{text:'More',icon:CgMoreO,link:''}
 	
 ]
 export default MENU_ITEMS
