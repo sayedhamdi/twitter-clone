@@ -7,10 +7,10 @@ import {useState} from "react"
 import MainRouter from './MainRouter';
 function App() {
   let navigate = useNavigate();
-  let [isAuth,setisAuth] = useState(false)
+  let [isAuth,setIsAuth] = useState(false)
   // logique ithabet el user aandou token fel storage ->yabaathlou lel serveur 
   useEffect(()=>{
-    setisAuth(localStorage.getItem("uID")!=null)
+  //  setisAuth(localStorage.getItem("uID")!=null)
     if (isAuth){
       navigate("/home")
     }else{
@@ -25,7 +25,7 @@ function App() {
           <Row>
             {isAuth && <LeftSideBar /> }
             <Col sm={{span: (isAuth)?6:12  }}>
-              <MainRouter />
+              <MainRouter setIsAuth={setIsAuth}/>
             </Col>
             {isAuth && <Col sm="3">right side bar</Col> }
           </Row>
