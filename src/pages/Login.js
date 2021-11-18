@@ -1,7 +1,9 @@
 import {Container,Row,Button,Alert} from "react-bootstrap"
 import {BsTwitter} from "react-icons/bs"
 import {useState} from "react"
+import {useNavigate} from "react-router-dom"
 export default function Login({setIsAuth}){
+	let navigate = useNavigate()
 	let [email,setEmail]  = useState("")
 	let [password,setPassword]  = useState("")
 	
@@ -9,7 +11,8 @@ export default function Login({setIsAuth}){
 	let [emailError,setEmailError] = useState("")
 	let [passError,setPassError] = useState("")
 	let [errorLogin,setErrorLogin] = useState("")
-	function handleLogin(){
+	function handleLogin(e){
+		e.preventDefault();
 		// validation 
 		if ( !email ){
 			setEmailError("Email est vide")
@@ -41,10 +44,12 @@ export default function Login({setIsAuth}){
 			setErrorLogin("Error in email or password")
 		}
 		console.log(`email : ${email} | password : ${password}`)
+		navigate("/home")
 	}
 	return (
 		<Container >
 			<Row className="justify-content-md-center">
+				<form onSubmit={e=>handleLogin(e)}>
 				<BsTwitter style={{fontSize:"70px",color:"#2B9BF0"}}/>	
 				<h2 style={{textAlign:'center',marginTop:'20px',marginBottom:'20px'}}>Login to Twitter </h2>	
 				{(errorLogin) && <Alert variant="danger">{errorLogin}</Alert>}
@@ -55,7 +60,8 @@ export default function Login({setIsAuth}){
     
   
 				<input onChange={e=>setPassword(e.target.value)} style={{margin:'10px'}} type="password" value={password} placeholder="password"/>
-				<Button onClick={handleLogin}>Login</Button>
+				<Button type="submit" onClick={handleLogin}>Login</Button>
+				</form>
 			</Row>		
 		</Container>
 	)
