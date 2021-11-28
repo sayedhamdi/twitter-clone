@@ -33,7 +33,13 @@ export default function Login({setIsAuth}){
 		}
 		setErrorLogin("")
 		//Envoyer 
-		
+		fetch("http://localhost/8000",{
+			method:"POST",
+			body:{
+				email,
+				password
+			}
+		})	
 		if (email =="hmed@gmail.com" && password=="1234hmed") 
 		{
 			//logi el user

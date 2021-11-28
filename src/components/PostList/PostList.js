@@ -1,7 +1,7 @@
 import {useState,useEffect} from 'react'
 import CircularProgress from '@mui/material/CircularProgress';
 
-export default function PostList({posts,isLoading,loadedPostsNumber}){
+export default function PostList({posts,isLoading,loadedPostsNumber,setIsLoading}){
 	
 	
 	return (
@@ -11,7 +11,7 @@ export default function PostList({posts,isLoading,loadedPostsNumber}){
 				if(index>loadedPostsNumber){
 					return 
 				}
-				return(<Post  {...post}/>)
+				return(<Post  {...post} id={post._id} setIsLoading={setIsLoading}/>)
 			
 			})
 		
@@ -25,13 +25,20 @@ let postStyle ={
 		fontWeight:'bold'
 	}
 } 
-function Post({title,body,date,author}){
+function Post({title,body,date,author,id,setIsLoading}){
+    console.log(id)
+    async function deletePost(){
+            
+            await fetch(`http://localhost:8000/posts/${id}`,{method:"DELETE"})
+            setIsLoading(true);
+    }
 	return (
 		<div >
 		<h1>{title}</h1>
 		<p>
 			{body}
 		</p>
+        <button onClick={deletePost}>delete</button>
 		<span style={postStyle.span}>{author}</span>
 		</div>
 	)

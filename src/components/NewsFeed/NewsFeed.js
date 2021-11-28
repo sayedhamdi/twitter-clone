@@ -14,12 +14,11 @@ export default function NewsFeed(){
 	let [isLoading,setIsLoading] = useState(true)
 	
 	function handleSendPostRequest(){
-		fetch('https://jsonplaceholder.typicode.com/posts', {
-			method: 'POST',
-			body: JSON.stringify({
-			title: 'titre feragh',
-			body: post,
-			userId: 1,
+		fetch('http://localhost:8000/posts', {
+			    method: 'POST',
+			    body: JSON.stringify({
+			    title: post.substring(0,20),
+			    body: post
 			}),
 			headers: {
 			'Content-type': 'application/json; charset=UTF-8',
@@ -30,11 +29,10 @@ export default function NewsFeed(){
 	}
 	function handlePostSubmit(){
 
-		console.log(post)
-		setPosts([{body:post},...posts])
 		
 		setPost("")
 		handleSendPostRequest()
+        setIsLoading(true)
 	}
 	window.onscroll = function (e) {  
 		let viewPortHeight = window.innerHeight
@@ -50,28 +48,38 @@ export default function NewsFeed(){
 		
 
 	}
+    async function  fP(){
+        try {
+            let res = await fetch('http://localhost:8000/posts');
+            let posts = await res.json();
+            setPosts(posts.reverse())
+            setIsLoading(false);
+        }catch(e){
+            console.log("no data");
+        }
+    }
 	function fetchPosts(){
-		fetch('https://jsonplaceholder.typicode.com/posts')
+		fetch('http://localhost:8000/posts')
 			.then(response => response.json())
 			.then(postsData => {
 				console.log(postsData)
-				setPosts(postsData)
+				setPosts(postsData.reverse())
 				setIsLoading(false)
 			})
 	}
 	useEffect(()=>{
 		if(isLoading){
-			fetchPosts()
-		}
+		    fP()
+        }
 		
-	})
+	},[isLoading])
 
 	return (
 		<div className="NewsFeed">
 			<HeaderTab text="Home"  cornerIcon={<FiSettings />} />
 			<textarea onChange={(e)=>setPost(e.target.value)}></textarea>
 			<Button onClick={handlePostSubmit}>POST</Button>
-			<PostList posts={posts} setPosts={setPosts} isLoading={isLoading} loadedPostsNumber={loadedPostsNumber} />
+			<PostList setIsLoading={setIsLoading}posts={posts} setPosts={setPosts} isLoading={isLoading} loadedPostsNumber={loadedPostsNumber} />
 		</div>
 	)
 } 

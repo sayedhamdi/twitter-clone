@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { Container,Row,Col,Button} from 'react-bootstrap';
 import LeftSideBar from "./components/LeftSideBar"
+import NewsFeed from "./components/NewsFeed/NewsFeed"
 import { useNavigate } from "react-router-dom";
 import {useState} from "react"
 import MainRouter from './MainRouter';
@@ -24,7 +25,8 @@ function App() {
             <Row>
             {isAuth && <LeftSideBar /> }
             <Col sm={{span: (isAuth)?6:12  }}>
-              <MainRouter setIsAuth={setIsAuth}/>
+      {/*<MainRouter setIsAuth={setIsAuth}/> */}
+      <NewsFeed />
             </Col>
             {isAuth && <Col sm="3">
               <Button variant="danger"onClick={()=>setIsAuth(false)}>Logout</Button>
